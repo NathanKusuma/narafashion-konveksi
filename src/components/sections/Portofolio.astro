@@ -1,28 +1,40 @@
 ---
+import { Image } from 'astro:assets';
+
+// Import all portfolio images
+const imageModules = import.meta.glob<{ default: ImageMetadata }>('../../assets/portofolio/*.{jpeg,jpg,JPG,png}', { eager: true });
+
+// Create a map of filename to image
+const imageMap: Record<string, ImageMetadata> = {};
+Object.entries(imageModules).forEach(([path, module]) => {
+  const filename = path.split('/').pop() || '';
+  imageMap[filename] = module.default;
+});
+
 const portfolioItems = [
   {
     name: 'SMA Negeri 9 Malang',
     rating: 5,
     testimonial: 'Seragamnya rapi, bahannya nyaman dipakai, dan jahitannya kuat. Prosesnya juga cepat dan komunikatif.',
-    images: ['/portofolio/1.jpeg', '/portofolio/2.jpeg'],
+    images: [imageMap['1.jpeg'], imageMap['2.jpeg']],
   },
   {
     name: 'BA Restu Malang',
     rating: 5,
     testimonial: 'Hasil produksinya sangat memuaskan, terlihat rapi dan seragam saat acara wisuda. Terima kasih Narafashion.',
-    images: ['/portofolio/3198a5a5-68a2-4e0c-a37a-031d411c7029.JPG', '/portofolio/af16c5d5-f73f-4349-959c-1317f7429997.JPG'],
+    images: [imageMap['3198a5a5-68a2-4e0c-a37a-031d411c7029.JPG'], imageMap['af16c5d5-f73f-4349-959c-1317f7429997.JPG']],
   },
   {
     name: 'Universitas Islam Negeri Maulana Malik Ibrahim',
     rating: 5,
     testimonial: 'Kualitas jahitan bagus, detailnya rapi, dan nyaman digunakan untuk kegiatan praktik maupun acara resmi.',
-    images: ['/portofolio/84b79c2f-6135-48db-bed1-78be0e0d7a29.JPG'],
+    images: [imageMap['84b79c2f-6135-48db-bed1-78be0e0d7a29.JPG']],
   },
   {
     name: 'Universitas Brawijaya',
     rating: 5,
     testimonial: 'Vest KKN-nya kuat, nyaman dipakai seharian, dan hasilnya sesuai dengan yang kami harapkan.',
-    images: ['/portofolio/a287d5be-8d68-4b70-ab8b-d7aee516355d.JPG'],
+    images: [imageMap['a287d5be-8d68-4b70-ab8b-d7aee516355d.JPG']],
   },
 ];
 
@@ -46,9 +58,11 @@ const renderStars = (rating: number) => {
           <div class={`flex gap-3 mb-6 w-full justify-center ${item.images.length === 1 ? 'max-w-md' : ''}`}>
             {item.images.map((image, index) => (
               <div class={`overflow-hidden rounded-lg ${item.images.length === 1 ? 'w-full' : 'w-1/2'}`}>
-                <img
+                <Image
                   src={image}
                   alt={`${item.name} - ${index + 1}`}
+                  width={400}
+                  height={250}
                   class="w-full h-48 md:h-56 object-cover hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                 />

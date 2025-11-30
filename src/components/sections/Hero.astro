@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import heroBg from '../../assets/hero/1.png';
+
 const services = [
   'Seragam & Pakaian Resmi',
   'Busana Muslim & Modest Wear',
@@ -15,10 +18,11 @@ const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 <section id="home" class="relative min-h-screen flex items-center">
   <!-- Background Image -->
   <div class="absolute inset-0 z-0">
-    <img
-      src="/home/1.png"
+    <Image
+      src={heroBg}
       alt="Narafashion Konveksi Workshop"
       class="w-full h-full object-cover"
+      loading="eager"
     />
     <!-- Dark Overlay -->
     <div class="absolute inset-0 bg-black/60"></div>

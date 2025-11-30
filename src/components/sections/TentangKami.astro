@@ -1,32 +1,17 @@
 ---
-// Generate array of image paths from tentang-kami folder
-const images = [
-  '/tentang-kami/1.jpeg',
-  '/tentang-kami/2.jpeg',
-  '/tentang-kami/3.jpeg',
-  '/tentang-kami/4.jpeg',
-  '/tentang-kami/5.jpeg',
-  '/tentang-kami/6.jpeg',
-  '/tentang-kami/7.jpeg',
-  '/tentang-kami/8.jpg',
-  '/tentang-kami/9.jpeg',
-  '/tentang-kami/10.jpeg',
-  '/tentang-kami/11.jpg',
-  '/tentang-kami/12.jpg',
-  '/tentang-kami/13.jpg',
-  '/tentang-kami/14.jpg',
-  '/tentang-kami/15.jpeg',
-  '/tentang-kami/16.jpeg',
-  '/tentang-kami/17.jpeg',
-  '/tentang-kami/18.jpeg',
-  '/tentang-kami/19.jpeg',
-  '/tentang-kami/20.jpeg',
-  '/tentang-kami/21.jpeg',
-  '/tentang-kami/22.jpeg',
-  '/tentang-kami/23.jpeg',
-  '/tentang-kami/24.jpeg',
-  '/tentang-kami/25.jpeg',
-];
+import { Image } from 'astro:assets';
+
+// Import all images from tentang-kami folder
+const imageModules = import.meta.glob<{ default: ImageMetadata }>('../../assets/tentang-kami/*.{jpeg,jpg,png}', { eager: true });
+
+// Sort images numerically and create array
+const images = Object.entries(imageModules)
+  .map(([path, module]) => {
+    const filename = path.split('/').pop() || '';
+    const num = parseInt(filename.split('.')[0]);
+    return { src: module.default, num, filename };
+  })
+  .sort((a, b) => a.num - b.num);
 ---
 
 <section id="tentang-kami" class="py-20 lg:py-28 bg-white">
@@ -52,12 +37,14 @@ const images = [
         {images.map((image, index) => (
           <div
             class="group flex-shrink-0 w-64 md:w-72 lg:w-80 aspect-[4/3] snap-start cursor-pointer overflow-hidden rounded-lg carousel-item"
-            data-carousel-image={image}
+            data-carousel-image={image.src.src}
             data-carousel-name={`Narafashion Workshop ${index + 1}`}
           >
-            <img
-              src={image}
+            <Image
+              src={image.src}
               alt={`Narafashion Workshop ${index + 1}`}
+              width={320}
+              height={240}
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               loading="lazy"
             />

@@ -1,19 +1,33 @@
 ---
+import { Image } from 'astro:assets';
+
+// Import all product images
+import img1 from '../../assets/jasa-konveksi/1.png';
+import img2 from '../../assets/jasa-konveksi/2.png';
+import img3 from '../../assets/jasa-konveksi/3.png';
+import img4 from '../../assets/jasa-konveksi/4.png';
+import img5 from '../../assets/jasa-konveksi/5.png';
+import img7 from '../../assets/jasa-konveksi/7.png';
+import img8 from '../../assets/jasa-konveksi/8.png';
+import img9 from '../../assets/jasa-konveksi/9.png';
+import img10 from '../../assets/jasa-konveksi/10.png';
+import img11 from '../../assets/jasa-konveksi/11.png';
+
 // Urutan sesuai design: Tank Top, Blouse, Busana Muslim, PDH, Jaket, Baju Anak, Kemeja, Daster
 const produkFashion = [
-  { name: 'Tank Top', price: 'Rp20.000', image: '/jasa-konveksi/10.png' },
-  { name: 'Blouse', price: 'Rp30.000', image: '/jasa-konveksi/4.png' },
-  { name: 'Busana Muslim', price: 'Rp45.000', image: '/jasa-konveksi/11.png' },
-  { name: 'PDH', price: 'Rp110.000', image: '/jasa-konveksi/5.png', note: 'Sudah termasuk bahan hingga Bordir di 2 titik' },
-  { name: 'Jaket', price: 'Rp70.000', image: '/jasa-konveksi/1.png' },
-  { name: 'Baju Anak', price: 'Rp20.000', image: '/jasa-konveksi/8.png' },
-  { name: 'Kemeja', price: 'Rp30.000', image: '/jasa-konveksi/3.png' },
-  { name: 'Daster', price: 'Rp35.000', image: '/jasa-konveksi/2.png' },
+  { name: 'Tank Top', price: 'Rp20.000', image: img10 },
+  { name: 'Blouse', price: 'Rp30.000', image: img4 },
+  { name: 'Busana Muslim', price: 'Rp45.000', image: img11 },
+  { name: 'PDH', price: 'Rp110.000', image: img5, note: 'Sudah termasuk bahan hingga Bordir di 2 titik' },
+  { name: 'Jaket', price: 'Rp70.000', image: img1 },
+  { name: 'Baju Anak', price: 'Rp20.000', image: img8 },
+  { name: 'Kemeja', price: 'Rp30.000', image: img3 },
+  { name: 'Daster', price: 'Rp35.000', image: img2 },
 ];
 
 const produkAksesoris = [
-  { name: 'Aksesoris', price: 'Rp5.000', image: '/jasa-konveksi/9.png' },
-  { name: 'Hijab', price: 'Rp7.000', image: '/jasa-konveksi/7.png' },
+  { name: 'Aksesoris', price: 'Rp5.000', image: img9 },
+  { name: 'Hijab', price: 'Rp7.000', image: img7 },
 ];
 ---
 
@@ -36,13 +50,15 @@ const produkAksesoris = [
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
         {produkFashion.map((product) => (
           <div class="group flex flex-col items-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer"
-               data-image={product.image}
+               data-image={product.image.src}
                data-name={product.name}>
             <!-- Product Image -->
             <div class="w-full mb-4 overflow-hidden rounded-lg">
-              <img
+              <Image
                 src={product.image}
                 alt={product.name}
+                width={300}
+                height={400}
                 class="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
               />
@@ -76,13 +92,15 @@ const produkAksesoris = [
         <div class="hidden md:block"></div>
         {produkAksesoris.map((product) => (
           <div class="group flex flex-col items-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer"
-               data-image={product.image}
+               data-image={product.image.src}
                data-name={product.name}>
             <!-- Product Image -->
             <div class="w-full mb-4 overflow-hidden rounded-lg">
-              <img
+              <Image
                 src={product.image}
                 alt={product.name}
+                width={300}
+                height={400}
                 class="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
               />
