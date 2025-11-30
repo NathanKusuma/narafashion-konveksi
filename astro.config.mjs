@@ -5,8 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO: Ganti dengan domain asli nanti
-  site: 'https://narafashion.com',
+  site: 'https://narafashion-konveksi.vercel.app',
 
   vite: {
     plugins: [tailwindcss()]
