@@ -1,0 +1,106 @@
+---
+const faqsLeft = [
+  {
+    question: 'Produk apa saja yang bisa dibuat?',
+    answer: 'Kami menerima produksi berbagai kebutuhan produk fashion hingga aksesoris, seperti; hijab, gamis, kemeja, kaos, jaket, seragam, PDH, jas, almamater, mukenah, daster, totebag, tas spunbond, scrunchie, dll. Custom desain dari client.',
+  },
+  {
+    question: 'Min. Order berapa?',
+    answer: 'Produk Fashion min. order 22 pcs\nProduk Hijab dan Aksesoris min. order 40 pcs\n*Pembelian di atas 100 pcs akan kami beri diskon',
+  },
+  {
+    question: 'Apakah bisa pesan dari luar kota?',
+    answer: 'Ya, kami melayani pemesanan dari seluruh Indonesia bahkan ke luar negeri. Mulai konsultasi, pengerjaan, hingga pengiriman bisa dilakukan secara full online.',
+  },
+  {
+    question: 'Apakah bisa request bahan dan custom desain sendiri?',
+    answer: 'Narafashion menerapkan sistem makloon, sehingga bahan utama disediakan oleh klien. Untuk desain, klien bebas melakukan custom sesuai kebutuhan, mulai dari model, warna, ukuran, sablon/bordir, hingga pemasangan label brand.',
+  },
+];
+
+const faqsRight = [
+  {
+    question: 'Berapa lama waktu produksinya?',
+    answer: 'Waktu produksi tergantung jumlah dan tingkat kesulitan produk, umumnya berkisar antara 2–3 minggu setelah DP dan final desain.',
+  },
+  {
+    question: 'Apakah menyediakan pembuatan sampel produk?',
+    answer: 'Ya, Narafashion menyediakan pembuatan sampel sebelum produksi massal. Sampel dibuat agar klien bisa mengecek model, bahan, ukuran, dan hasil jahitan terlebih dahulu sebelum lanjut ke jumlah besar.',
+  },
+  {
+    question: 'Bagaimana cara pemesanannya?',
+    answer: 'Pemesanan bisa dilakukan melalui Whatsapp Narafashion dengan mengirimkan detail produk, jumlah, dan referensi desain.',
+  },
+  {
+    question: 'Apakah Narafashion menyediakan pemasangan label brand?',
+    answer: 'Ya, kami menyediakan FREE pemasangan label untuk semua pesanan (label disediakan oleh klien).',
+  },
+];
+---
+
+<section id="faq" class="py-20 lg:py-28 bg-primary">
+  <div class="container mx-auto px-4 lg:px-8">
+    <!-- Title -->
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-white mb-2">
+      YANG SERING DITANYAKAN
+    </h2>
+
+    <!-- Subtitle -->
+    <p class="text-center text-white/90 italic mb-12 text-base md:text-lg">
+      (Frequently Asked Question)
+    </p>
+
+    <!-- FAQ Two Columns -->
+    <div class="flex flex-col md:flex-row gap-4 lg:gap-6">
+      <!-- Left Column -->
+      <div class="flex-1 flex flex-col gap-4 lg:gap-6">
+        {faqsLeft.map((faq) => (
+          <details class="bg-white rounded-xl overflow-hidden">
+            <summary class="flex items-start gap-4 p-5 min-h-[88px] cursor-pointer hover:bg-gray-50 transition-colors list-none [&::-webkit-details-marker]:hidden">
+              <svg
+                class="chevron w-5 h-5 mt-0.5 text-gray-400 flex-shrink-0 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+              <span class="text-gray-900 font-semibold text-base md:text-lg">{faq.question}</span>
+            </summary>
+            <div class="px-5 pb-5 pl-14">
+              <p class="text-gray-600 text-sm md:text-base whitespace-pre-line">{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <!-- Right Column -->
+      <div class="flex-1 flex flex-col gap-4 lg:gap-6">
+        {faqsRight.map((faq) => (
+          <details class="bg-white rounded-xl overflow-hidden">
+            <summary class="flex items-start gap-4 p-5 min-h-[88px] cursor-pointer hover:bg-gray-50 transition-colors list-none [&::-webkit-details-marker]:hidden">
+              <svg
+                class="chevron w-5 h-5 mt-0.5 text-gray-400 flex-shrink-0 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+              <span class="text-gray-900 font-semibold text-base md:text-lg">{faq.question}</span>
+            </summary>
+            <div class="px-5 pb-5 pl-14">
+              <p class="text-gray-600 text-sm md:text-base whitespace-pre-line">{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  details[open] .chevron {
+    transform: rotate(180deg);
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+// Urutan sesuai design dari kiri ke kanan, atas ke bawah
+const customers = [
+  // Row 1
+  { name: 'Universitas Negeri Malang', logo: '/our-customer/UNIVERSITAS NEGERI MALANG.png' },
+  { name: 'Universitas Muhammadiyah Malang', logo: '/our-customer/UNIVERSITAS MUHAMMADIYAH MALANG.png' },
+  { name: 'Universitas Brawijaya', logo: '/our-customer/UNIVERSITAS BRAWIJAYA.png' },
+  { name: 'UIN Maliki Malang', logo: '/our-customer/UIN MALIKI MALANG.png' },
+  { name: 'AZ Zahra Group', logo: '/our-customer/AZ ZAHRA GROUP.png' },
+  { name: 'SMAK St Albertus Dempo Malang', logo: '/our-customer/SMAK ST ALBERTUS DEMPO MALANG.png' },
+  // Row 2
+  { name: 'FILKOM UB', logo: '/our-customer/FILKOM UB.png' },
+  { name: 'Yayasan Pendidikan Ananda Bagan Batu', logo: '/our-customer/YAYASAN PENDIDIKAN ANANDA BAGAN BATU.jpeg' },
+  { name: 'IIBS Thursina', logo: '/our-customer/IIBS THURSINA.png' },
+  { name: 'SMK Kesehatan Madani Indonesia', logo: '/our-customer/SMK KESEHATAN MADANI INDONESIA.png' },
+  { name: 'AL-RIFAIE', logo: '/our-customer/AL-RIFAIE.png' },
+  // Row 3
+  { name: 'Wissnu Amanatul Ummah', logo: '/our-customer/WISSNU AMANATUL UMMAH.png' },
+  { name: 'KB-BA Restu Malang', logo: '/our-customer/KB-BA RESTU MALANG.jpeg' },
+  { name: 'PG Kebon Agung', logo: '/our-customer/PG KEBON AGUNG.png' },
+  { name: 'Ilmu Komunikasi UMM', logo: '/our-customer/ILKOM UMM.jpg' },
+  // Row 4
+  { name: 'Universitas Wisnuwardhana', logo: '/our-customer/UNIVERSITAS WISNUWARDHANA.png' },
+  { name: 'Sekolah Dasar Islam Mohammad Hatta', logo: '/our-customer/SEKOLAH DASAR ISLAM MOHAMMAD HATTA.png' },
+  { name: 'Pesantren Teknologi Majapahit', logo: '/our-customer/PESANTREN TEKNOLOGI MAJAPAHIT.jpg' },
+  { name: 'Yayasan Darullughah Waddawah', logo: '/our-customer/YAYASAN DARULLUGHAH WADDAWAH.png' },
+  { name: 'TPQ Nurul Huda Malang', logo: '/our-customer/TPQ NURUL HUDA MALANG.jpeg' },
+  { name: 'MI Hasyim Asyari', logo: '/our-customer/MI HASYIM ASYARI.jpeg' },
+  // New additions
+  { name: 'BPJS Kesehatan', logo: '/our-customer/new-1.png' },
+  { name: 'Sekolah Islam Ibnu Hajar', logo: '/our-customer/new-2.jpg' },
+  { name: 'SMP Negeri 2 Pandaan', logo: '/our-customer/new-3.png' },
+];
+---
+
+<section id="our-customers" class="py-20 lg:py-28 bg-white">
+  <div class="container mx-auto px-4 lg:px-8">
+    <!-- Title -->
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-gray-900 mb-4">
+      OUR CUSTOMERS
+    </h2>
+
+    <!-- Subtitle -->
+    <p class="text-center text-gray-900 mb-12 text-base md:text-lg font-medium">
+      Narafashion Telah Dipercaya Sejak Tahun 2008
+    </p>
+
+    <!-- Logo Grid -->
+    <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 lg:gap-8 items-center justify-items-center">
+      {customers.map((customer) => (
+        <div class="flex items-center justify-center p-4 h-24 md:h-28 lg:h-32 w-full">
+          <img
+            src={customer.logo}
+            alt={customer.name}
+            class="max-h-full max-w-full object-contain filter hover:scale-110 transition-transform duration-300"
+            loading="lazy"
+            title={customer.name}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

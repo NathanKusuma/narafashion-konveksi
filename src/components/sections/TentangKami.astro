@@ -1,0 +1,176 @@
+---
+// Generate array of image paths from tentang-kami folder
+const images = [
+  '/tentang-kami/1.jpeg',
+  '/tentang-kami/2.jpeg',
+  '/tentang-kami/3.jpeg',
+  '/tentang-kami/4.jpeg',
+  '/tentang-kami/5.jpeg',
+  '/tentang-kami/6.jpeg',
+  '/tentang-kami/7.jpeg',
+  '/tentang-kami/8.jpg',
+  '/tentang-kami/9.jpeg',
+  '/tentang-kami/10.jpeg',
+  '/tentang-kami/11.jpg',
+  '/tentang-kami/12.jpg',
+  '/tentang-kami/13.jpg',
+  '/tentang-kami/14.jpg',
+  '/tentang-kami/15.jpeg',
+  '/tentang-kami/16.jpeg',
+  '/tentang-kami/17.jpeg',
+  '/tentang-kami/18.jpeg',
+  '/tentang-kami/19.jpeg',
+  '/tentang-kami/20.jpeg',
+  '/tentang-kami/21.jpeg',
+  '/tentang-kami/22.jpeg',
+  '/tentang-kami/23.jpeg',
+  '/tentang-kami/24.jpeg',
+  '/tentang-kami/25.jpeg',
+];
+---
+
+<section id="tentang-kami" class="py-20 lg:py-28 bg-white">
+  <div class="container mx-auto px-4 lg:px-8">
+    <!-- Title -->
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-gray-900 mb-6">
+      Tentang Kami
+    </h2>
+
+    <!-- Description 1 -->
+    <p class="text-center text-gray-900 max-w-4xl mx-auto mb-12 text-base md:text-lg">
+      Narafashion Konveksi lahir dari semangat besar untuk mendukung pertumbuhan brand
+      lokal dan UMKM melalui layanan konveksi yang terpercaya, cepat, dan berkualitas.
+    </p>
+
+    <!-- Image Carousel -->
+    <div class="relative mb-12">
+      <!-- Carousel Container -->
+      <div
+        id="carousel-container"
+        class="flex gap-4 overflow-x-auto scroll-smooth pb-4 snap-x snap-mandatory hide-scrollbar"
+      >
+        {images.map((image, index) => (
+          <div
+            class="group flex-shrink-0 w-64 md:w-72 lg:w-80 aspect-[4/3] snap-start cursor-pointer overflow-hidden rounded-lg carousel-item"
+            data-carousel-image={image}
+            data-carousel-name={`Narafashion Workshop ${index + 1}`}
+          >
+            <img
+              src={image}
+              alt={`Narafashion Workshop ${index + 1}`}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+
+      <!-- Navigation Buttons -->
+      <button
+        id="carousel-prev"
+        class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white shadow-lg rounded-full p-3 hover:bg-gray-100 transition-colors hidden md:flex items-center justify-center"
+        aria-label="Previous"
+      >
+        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button
+        id="carousel-next"
+        class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white shadow-lg rounded-full p-3 hover:bg-gray-100 transition-colors hidden md:flex items-center justify-center"
+        aria-label="Next"
+      >
+        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Description 2 -->
+    <p class="text-center text-gray-900 max-w-4xl mx-auto text-base md:text-lg">
+      Sejak tahun 2018, kami telah dipercaya oleh ratusan hingga ribuan klien dari berbagai kalangan
+      dan daerah, mulai dari institusi pendidikan, perusahaan, organisasi, hingga brand fashion lokal.
+    </p>
+  </div>
+</section>
+
+<!-- Lightbox Modal -->
+<div id="tentang-lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 p-4">
+  <button id="tentang-lightbox-close" class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+  <img id="tentang-lightbox-image" src="" alt="" class="max-w-full max-h-[90vh] object-contain rounded-lg" />
+</div>
+
+<style>
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  // Carousel navigation
+  const container = document.getElementById('carousel-container');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+
+  const scrollAmount = 320;
+
+  prevBtn?.addEventListener('click', () => {
+    container?.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    container?.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  });
+
+  // Lightbox functionality
+  const lightbox = document.getElementById('tentang-lightbox');
+  const lightboxImage = document.getElementById('tentang-lightbox-image') as HTMLImageElement;
+  const lightboxClose = document.getElementById('tentang-lightbox-close');
+
+  // Use specific selector to avoid conflict with JasaKonveksi
+  const carouselItems = document.querySelectorAll('.carousel-item');
+
+  carouselItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      const imageSrc = item.getAttribute('data-carousel-image');
+      const imageName = item.getAttribute('data-carousel-name');
+      if (imageSrc && lightboxImage && lightbox) {
+        lightboxImage.src = imageSrc;
+        lightboxImage.alt = imageName || '';
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  // Close lightbox
+  const closeLightbox = () => {
+    if (lightbox) {
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+  };
+
+  lightboxClose?.addEventListener('click', closeLightbox);
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeLightbox();
+    }
+  });
+</script>

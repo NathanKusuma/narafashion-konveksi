@@ -1,0 +1,157 @@
+---
+// Urutan sesuai design: Tank Top, Blouse, Busana Muslim, PDH, Jaket, Baju Anak, Kemeja, Daster
+const produkFashion = [
+  { name: 'Tank Top', price: 'Rp20.000', image: '/jasa-konveksi/10.png' },
+  { name: 'Blouse', price: 'Rp30.000', image: '/jasa-konveksi/4.png' },
+  { name: 'Busana Muslim', price: 'Rp45.000', image: '/jasa-konveksi/11.png' },
+  { name: 'PDH', price: 'Rp110.000', image: '/jasa-konveksi/5.png', note: 'Sudah termasuk bahan hingga Bordir di 2 titik' },
+  { name: 'Jaket', price: 'Rp70.000', image: '/jasa-konveksi/1.png' },
+  { name: 'Baju Anak', price: 'Rp20.000', image: '/jasa-konveksi/8.png' },
+  { name: 'Kemeja', price: 'Rp30.000', image: '/jasa-konveksi/3.png' },
+  { name: 'Daster', price: 'Rp35.000', image: '/jasa-konveksi/2.png' },
+];
+
+const produkAksesoris = [
+  { name: 'Aksesoris', price: 'Rp5.000', image: '/jasa-konveksi/9.png' },
+  { name: 'Hijab', price: 'Rp7.000', image: '/jasa-konveksi/7.png' },
+];
+---
+
+<section id="jasa-konveksi" class="py-20 lg:py-28 bg-primary">
+  <div class="container mx-auto px-4 lg:px-8">
+
+    <!-- Produk Fashion -->
+    <div class="mb-20">
+      <!-- Title -->
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-white mb-4">
+        Produk Fashion
+      </h2>
+
+      <!-- Subtitle -->
+      <p class="text-center text-white/90 mb-12 text-sm md:text-base">
+        Min. Order 22 pcs &nbsp;|&nbsp; All Size &nbsp;|&nbsp; Bisa Mix hingga 4 Warna/Motif
+      </p>
+
+      <!-- Product Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+        {produkFashion.map((product) => (
+          <div class="group flex flex-col items-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer"
+               data-image={product.image}
+               data-name={product.name}>
+            <!-- Product Image -->
+            <div class="w-full mb-4 overflow-hidden rounded-lg">
+              <img
+                src={product.image}
+                alt={product.name}
+                class="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+
+            <!-- Price Info -->
+            <p class="text-white/80 text-sm mb-1">Harga Mulai</p>
+            <p class="text-white font-bold text-lg md:text-xl">{product.price}</p>
+            {product.note && (
+              <p class="bg-white text-primary text-xs text-center mt-2 px-3 py-1.5 rounded-full font-medium">{product.note}</p>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Produk Hijab, Tas, dan Aksesoris -->
+    <div>
+      <!-- Title -->
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-white mb-4">
+        Produk Hijab, Tas, dan Aksesoris
+      </h2>
+
+      <!-- Subtitle -->
+      <p class="text-center text-white/90 mb-12 text-sm md:text-base">
+        Min. Order 40 pcs &nbsp;|&nbsp; All Size &nbsp;|&nbsp; Bisa Mix hingga 6 Warna/Motif
+      </p>
+
+      <!-- Product Grid - Same size as above -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+        <div class="hidden md:block"></div>
+        {produkAksesoris.map((product) => (
+          <div class="group flex flex-col items-center p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer"
+               data-image={product.image}
+               data-name={product.name}>
+            <!-- Product Image -->
+            <div class="w-full mb-4 overflow-hidden rounded-lg">
+              <img
+                src={product.image}
+                alt={product.name}
+                class="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+
+            <!-- Price Info -->
+            <p class="text-white/80 text-sm mb-1">Harga Mulai</p>
+            <p class="text-white font-bold text-lg md:text-xl">{product.price}</p>
+          </div>
+        ))}
+        <div class="hidden md:block"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 p-4">
+  <button id="lightbox-close" class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+  <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[90vh] object-contain rounded-lg" />
+</div>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+  const lightboxClose = document.getElementById('lightbox-close');
+
+  // Get all product cards
+  const productCards = document.querySelectorAll('[data-image]');
+
+  productCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      const imageSrc = card.getAttribute('data-image');
+      const imageName = card.getAttribute('data-name');
+      if (imageSrc && lightboxImage && lightbox) {
+        lightboxImage.src = imageSrc;
+        lightboxImage.alt = imageName || '';
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  // Close lightbox
+  const closeLightbox = () => {
+    if (lightbox) {
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+  };
+
+  lightboxClose?.addEventListener('click', closeLightbox);
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  // Close on ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeLightbox();
+    }
+  });
+</script>
